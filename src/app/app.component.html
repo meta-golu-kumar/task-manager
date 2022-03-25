@@ -1,0 +1,51 @@
+<div>
+    <app-topbar (openTaskModal)="openTaskModal()" (openNewTask)="toggleNewTask()"></app-topbar>
+
+    <app-taskform [isOpen]="isOpenNewTask" [isNewTask]="isNewTaskClicked" (closeModal)="closeTaskModal()" (addTaskEvent)="addTask($event)" (updateTaskEvent)="updateTask($event)" [taskForUpdate]="taskForUpdate"></app-taskform>
+
+    <div class="position-relative">
+
+        <div class="container row pt-3 ms-auto me-auto">
+            <div class="col d-flex flex-column align-items-center ">
+                <ul class="list-unstyled px-2 columns">
+                    <h5>New</h5>
+                    <li *ngFor="let task of taskList">
+                        <div *ngIf="task.status == 'new'" class="my-2">
+                            <div class="my-2">
+                                <app-task [task]="task" (deleteTaskEvent)="deleteTask($event)" (openModalForUpdateEvent)="openModalForUpdate($event)"></app-task>
+                            </div>
+                        </div>
+                    </li>
+                </ul>
+            </div>
+
+            <div class="col d-flex flex-column align-items-center">
+                <ul class="list-unstyled columns px-2">
+                    <h5>In Progress</h5>
+                    <li *ngFor="let task of taskList">
+                        <div *ngIf="task.status == 'progress'" class="my-2">
+                            <div class="my-2">
+                                <app-task [task]="task" (deleteTaskEvent)="deleteTask($event)" (openModalForUpdateEvent)="openModalForUpdate($event)"></app-task>
+                            </div>
+                        </div>
+                    </li>
+                </ul>
+            </div>
+
+            <div class="col d-flex flex-column align-items-center">
+
+                <ul class="list-unstyled px-2 columns">
+                    <h5>Completed</h5>
+                    <li *ngFor="let task of taskList">
+                        <div *ngIf="task.status == 'completed'">
+                            <div class="my-2">
+                                <app-task [task]="task" (deleteTaskEvent)="deleteTask($event)" (openModalForUpdateEvent)="openModalForUpdate($event)"></app-task>
+                            </div>
+                        </div>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </div>
+
+</div>
